@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KidsKart Forgot Password</title>
+
+<style>
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Poppins',sans-serif;
+}
+
+/* BODY */
+
+body{
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  overflow:hidden;
+  position:relative;
+
+  background:
+  linear-gradient(
+ rgba(255,105,180,0.25),
+ rgba(255,182,193,0.25)
+  ),
+  url('https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?q=80&w=1400&auto=format&fit=crop');
+  
+  background-size:cover;
+  background-position:center;
+}
+
+/* FLOATING BUBBLES */
+
+.bubble{
+  position:absolute;
+  bottom:-120px;
+  border-radius:50%;
+  background:rgba(255,105,180,0.25);
+  border:1px solid rgba(255,192,203,0.4);
+  backdrop-filter:blur(5px);
+  animation:float 18s infinite ease-in;
+}
+
+.bubble:nth-child(1){
+  width:90px;
+  height:90px;
+  left:8%;
+  animation-duration:14s;
+}
+
+.bubble:nth-child(2){
+  width:60px;
+  height:60px;
+  left:25%;
+  animation-duration:12s;
+  animation-delay:2s;
+}
+
+.bubble:nth-child(3){
+  width:120px;
+  height:120px;
+  left:45%;
+  animation-duration:18s;
+}
+
+.bubble:nth-child(4){
+  width:70px;
+  height:70px;
+  left:68%;
+  animation-duration:15s;
+  animation-delay:1s;
+}
+
+.bubble:nth-child(5){
+  width:100px;
+  height:100px;
+  left:84%;
+  animation-duration:16s;
+}
+
+/* BUBBLE ANIMATION */
+
+@keyframes float{
+
+  0%{
+    transform:translateY(0) scale(1);
+    opacity:0;
+  }
+
+  20%{
+    opacity:1;
+  }
+
+  100%{
+    transform:translateY(-110vh) scale(1.3);
+    opacity:0;
+  }
+}
+
+/* CARD */
+
+.container{
+  width:420px;
+  padding:30px;
+  border-radius:25px;
+
+  background:rgba(255,255,255,0.20);
+
+  backdrop-filter:blur(18px);
+
+  border:1px solid rgba(255,255,255,0.3);
+
+  box-shadow:0 8px 32px rgba(0,0,0,0.2);
+
+  z-index:10;
+}
+
+/* LOGO */
+
+.logo{
+  text-align:center;
+  font-size:55px;
+  margin-bottom:10px;
+}
+
+/* HEADING */
+
+h2{
+  text-align:center;
+  color:#ff4f81;
+  margin-bottom:10px;
+  font-size:32px;
+}
+
+p{
+  text-align:center;
+  color:#333;
+  margin-bottom:25px;
+  font-size:14px;
+}
+
+/* INPUTS */
+
+.input-group{
+  margin-bottom:16px;
+}
+
+label{
+  display:block;
+  margin-bottom:6px;
+  margin-top: 6px;
+  color:#333;
+  font-weight:500;
+}
+
+input{
+  width:100%;
+  padding:13px;
+
+  border:none;
+  border-radius:12px;
+
+  background:rgba(255,255,255,0.9);
+
+  font-size:15px;
+}
+
+input:focus{
+  outline:none;
+  box-shadow:0 0 10px rgba(13,110,253,0.5);
+}
+
+/* BUTTONS */
+
+button{
+  width:100%;
+  padding:14px;
+
+  border:none;
+  border-radius:14px;
+
+  background:linear-gradient(
+  135deg,
+ #ff4fa3,
+ #ff85c1,
+ #ffc1e3
+ );
+
+  color:white;
+  font-size:16px;
+  font-weight:bold;
+
+  cursor:pointer;
+  transition:0.3s;
+  margin-top:10px;
+}
+
+button:hover{
+  transform:translateY(-2px);
+  box-shadow:0 0 10px rgba(255,79,163,0.5);
+}
+
+button:disabled{
+  opacity:0.7;
+  cursor:not-allowed;
+}
+
+/* MESSAGE */
+
+.success{
+  color:green;
+  text-align:center;
+  margin-top:12px;
+  font-weight:bold;
+}
+
+.error{
+  color:red;
+  text-align:center;
+  margin-top:12px;
+  font-weight:bold;
+}
+
+/* BACK */
+
+.back{
+  text-align:center;
+  margin-top:18px;
+}
+
+.back a{
+  color:#ff4fa3;
+  text-decoration:none;
+  font-weight:bold;
+}
+
+.back a:hover{
+  text-decoration:underline;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:500px){
+
+  .container{
+    width:90%;
+    padding:25px;
+  }
+
+  h2{
+    font-size:28px;
+  }
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- FLOATING BUBBLES -->
+
+<div class="bubble"></div>
+<div class="bubble"></div>
+<div class="bubble"></div>
+<div class="bubble"></div>
+<div class="bubble"></div>
+
+<!-- FORGOT PASSWORD CARD -->
+
+<div class="container">
+
+  <div class="logo">🛡️</div>
+
+  <h2>Forgot Password</h2>
+
+  <p>
+    Reset your password securely for KidsKart
+  </p>
+
+  <!-- EMAIL -->
+
+  <div class="input-group">
+    <label>Email Address</label>
+    <input
+      type="email"
+      id="email"
+      placeholder="Enter your email">
+  </div>
+
+  <!-- SEND OTP -->
+
+  <button id="sendBtn" onclick="sendOTP()">
+    Send OTP
+  </button>
+
+  <button
+  id="resendBtn"
+  onclick="sendOTP()"
+  style="display:none;">
+  Resend OTP
+  </button>
+
+  <!-- OTP -->
+  <div class="input-group">
+    <label>Enter OTP</label>
+    <input
+      type="text"
+      id="otp"
+      placeholder="Enter OTP">
+  </div>
+
+  <div id="timer"
+  style="
+  text-align:center;
+  font-weight:bold;
+  color:red;
+  margin-top:10px;">
+  01:00
+  </div>
+
+  <!-- VERIFY OTP -->
+
+  <button onclick="verifyOTP()">
+    Verify OTP
+  </button>
+
+  <!-- NEW PASSWORD -->
+
+  <div class="input-group">
+    <label>New Password</label>
+    <input
+      type="password"
+      id="newPassword"
+      placeholder="Enter new password">
+  </div>
+
+  <!-- CONFIRM PASSWORD -->
+
+  <div class="input-group">
+    <label>Confirm Password</label>
+    <input
+      type="password"
+      id="confirmPassword"
+      placeholder="Confirm password">
+  </div>
+
+  <!-- RESET -->
+
+  <button onclick="resetPassword()">
+    Reset Password
+  </button>
+
+  <div id="message"></div>
+
+  <!-- BACK -->
+
+  <div class="back">
+    <a href="register.html">
+      ← Back to Login
+    </a>
+  </div>
+
+</div>
+
+<script>
+
+let countdown;
+
+function startTimer(){
+
+    let timeLeft = 60;
+
+    clearInterval(countdown);
+
+    countdown = setInterval(()=>{
+
+        let minutes = Math.floor(timeLeft/60);
+        let seconds = timeLeft%60;
+
+        document.getElementById("timer").innerHTML =
+        `${minutes}:${seconds<10?'0':''}${seconds}`;
+
+        if(timeLeft <= 0){
+
+            clearInterval(countdown);
+
+            document.getElementById("timer").innerHTML =
+            "OTP Expired";
+        }
+
+        timeLeft--;
+
+    },1000);
+}
+let verified = false;
+
+/* SEND OTP */
+
+async function sendOTP(){
+
+  const email =
+  document.getElementById("email").value;
+
+  const sendBtn =
+  document.getElementById("sendBtn");
+
+  const message =
+  document.getElementById("message");
+
+  if(email === ""){
+
+    message.innerHTML =
+    "<div class='error'>Please enter email ❌</div>";
+
+    return;
+  }
+
+  sendBtn.disabled = true;
+  sendBtn.innerHTML = "Sending OTP...";
+
+  try{
+
+    const response = await fetch(
+    "send_otp.php",{
+
+      method:"POST",
+
+      headers:{
+        "Content-Type":"application/json"
+      },
+
+      body:JSON.stringify({email})
+
+    });
+
+    const data = await response.json();
+
+    if(data.success){
+
+      document.getElementById("resendBtn").style.display = "block";
+      startTimer();
+      sendBtn.innerHTML = "OTP Sent ✅";
+
+      message.innerHTML =
+      "<div class='success'>OTP Sent To Email ✅</div>";
+
+    }else{
+
+      sendBtn.disabled = false;
+
+      sendBtn.innerHTML = "Send OTP";
+
+      message.innerHTML =
+      "<div class='error'>" +
+      (data.error || "Failed To Send OTP ❌") +
+      "</div>";
+    }
+
+  }catch(error){
+
+    sendBtn.disabled = false;
+
+    sendBtn.innerHTML = "Send OTP";
+
+    message.innerHTML =
+    "<div class='error'>Server Error ❌</div>";
+  }
+}
+
+/* VERIFY OTP */
+
+async function verifyOTP(){
+
+  const otp =
+  document.getElementById("otp").value;
+
+  const message =
+  document.getElementById("message");
+
+  try{
+
+    const response = await fetch(
+    "verify_otp.php",{
+
+      method:"POST",
+
+      headers:{
+        "Content-Type":"application/json"
+      },
+
+      body:JSON.stringify({otp})
+
+    });
+
+    const data = await response.json();
+
+    if(data.success){
+
+    verified = true;
+
+    message.innerHTML =
+    "<div class='success'>" +
+    data.message +
+    " ✅</div>";
+
+}else{
+
+    verified = false;
+
+    message.innerHTML =
+    "<div class='error'>" +
+    data.message +
+    " ❌</div>";
+}
+
+  }catch(error){
+
+    message.innerHTML =
+    "<div class='error'>Verification Failed ❌</div>";
+  }
+}
+
+/* RESET PASSWORD */
+
+async function resetPassword(){
+
+  const pass =
+  document.getElementById("newPassword").value;
+
+  const confirm =
+  document.getElementById("confirmPassword").value;
+
+  const message =
+  document.getElementById("message");
+
+  if(!verified){
+
+    message.innerHTML =
+    "<div class='error'>Verify OTP First ❌</div>";
+
+    return;
+  }
+
+  if(pass === "" || confirm === ""){
+
+    message.innerHTML =
+    "<div class='error'>Enter Password ❌</div>";
+
+    return;
+  }
+
+  const passwordRegex =
+  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$/;
+
+  if(!passwordRegex.test(pass)){
+
+    message.innerHTML =
+    "<div class='error'>Password must contain uppercase, lowercase, number, special character and minimum 8 characters ❌</div>";
+
+    return;
+  }
+
+  if(pass !== confirm){
+
+    message.innerHTML =
+    "<div class='error'>Passwords Do Not Match ❌</div>";
+
+    return;
+  }
+
+  try{
+
+    const response = await fetch(
+      "reset_password.php",
+      {
+        method:"POST",
+        headers:{
+          "Content-Type":"application/json"
+        },
+        body:JSON.stringify({
+          password:pass
+        })
+      }
+    );
+
+    const data = await response.json();
+
+    if(data.success){
+
+      message.innerHTML =
+      "<div class='success'>Password Reset Successful ✅</div>";
+
+      setTimeout(()=>{
+
+        window.location.href = "register.html";
+
+      },2000);
+
+    }else{
+
+      message.innerHTML =
+      "<div class='error'>Reset Failed ❌</div>";
+    }
+
+  }catch(error){
+
+    message.innerHTML =
+    "<div class='error'>Server Error ❌</div>";
+  }
+}
+
+</script>
+
+</body>
+</html>
